@@ -1,0 +1,191 @@
+<?php 
+require 'functions.php';
+$jumlahBeritaPerhalaman = 6;
+$jumlahBerita = count(query("SELECT * FROM berita"));
+$jumlahHalaman = ceil($jumlahBerita / $jumlahBeritaPerhalaman);
+$halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+$awalBerita = ( $jumlahBeritaPerhalaman * $halamanAktif ) - $jumlahBeritaPerhalaman;
+$halamanAktif = intval($halamanAktif);
+
+$postingan = query("SELECT * FROM berita ORDER BY idBerita LIMIT $awalBerita, $jumlahBeritaPerhalaman");
+?>
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Informasi Bank</title>
+    <link rel="icon" type="image/png" href="img/logo/logobprpdk.png">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="css/manual/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style-enfold.css">
+    <script src="js/manual/preloader.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <!-- Google Fonts -->
+   <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'>
+
+    <script>
+    $(document).ready(function() {
+      $(".preloader").fadeOut();
+    })
+    </script>
+
+  </head>
+  <body>
+
+  <!--Pre Loader-->
+  <div class="preloader">
+    <div class="loading">
+      <img src="img/aset/spiner.gif" width="80">
+    </div>
+  </div>
+
+  <!--Navbar-->
+  <hr class="bg-danger fw-bold fixed-top" style="height: 13px; margin: top 15px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php"><img src="img/logo/logobprpdk.png" alt="" style="width:90px; height: auto; object-fit: contain;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto fw-bold fs-5">
+            <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="index.php"><i class="fas fa-home"></i> Beranda</a>
+            </li>
+           <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-info-circle"></i> Laporan Bank
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item text-white" href="registrasi.php"><i class="fas fa-info-circle"></i> Laporan Bulanan</a></li>
+                <li><a class="dropdown-item text-white" href="laporantahunan.php"><i class="fas fa-info-circle"></i> Laporan Tahunan</a></li>
+              </ul>
+            </li>
+                <!-- <a class="nav-link active text-white" aria-current="page" href="#">Beranda</a> -->
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="setoranSampah.php"><i class="fas fa-info-circle"></i> Informasi Bank</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i> Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item text-white" href="registrasi.php"><i class="fas fa-registered"></i> Registration</a></li>
+                <li><a class="dropdown-item text-white" href="login.php"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+              </ul>
+            </li>
+                <!-- <a class="nav-link active text-white" aria-current="page" href="#">Beranda</a> -->
+            </li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+ <!--Carousel-->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" for="01">
+          <img src="img/carousel/banner1.png" class="d-block w-100 bannerimg" alt="" id="01" style=" filter: brightness(50%);">
+          <div class="carousel-caption d-none d-md-block ">
+            <h5>Proses Pemilahan</h5>
+            <p>Proses pemilahan lanjut oleh petugas bank sampah.</p>
+          </div>
+        </div>
+        <div class="carousel-item" for="02">
+          <img src="img/carousel/banner2.png" class="d-block w-100" alt="..." id="02" style=" filter: brightness(50%);">
+          <div class="carousel-caption d-none d-md-block ">
+            <h5>Proses Penimbangan</h5>
+            <p>Proses penimbangan sampah oleh petugas bank sampah.</p>
+          </div>
+        </div>
+        <div class="carousel-item" for="03">
+          <img src="img/carousel/banner3.png" class="d-block w-100 bannerimg" alt="..." id="03" style=" filter: brightness(50%);">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Stock Sampah</h5>
+            <p>Beberapa stock sampah di bank sampah yang sudah berhasil di timbang dan siap untuk di jual.</p>
+          </div>
+        </div>
+        <div class="carousel-item" for="04">
+          <img src="img/carousel/banner4.png" class="d-block w-100" alt="..." id="04" style=" filter: brightness(50%);">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Penumpukan Sampah</h5>
+            <p>Penumpukan sampah yang belum dijadikan satu di dalam karung.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+      <!--konten2-->
+    <div class="container-about">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <h3 class="title-un" style="margin-top: 90px;">JADWALOPERASIONAL PT. BPR LPN PADANG KUNING</h3>
+                  <div class="title-un-icon"><i class="fas fa-calendar-alt"></i></div>
+                  <p class="title-un-des">.<!-- <div class="blockquote-footer text-center" style="margin-top: -45px; font-weight: bold;">Catatan: Diharapkan menyetorkan jenis sampah sesuai dengan hari yang telah ditentukan.</div> --></p>
+                  <!-- start css -->
+                  <div id="generic_price_table">   
+                      <section>
+                        <div class="container">
+                          <div class="row">
+                            <!-- start tabel -->
+                            <div class="col-md-4">
+                              <div class="generic_content active clearfix">
+                                  <div class="generic_head_price clearfix">
+                                      <div class="generic_head_content clearfix">
+                                        <div class="head_bg"></div>
+                                        <div class="head">
+                                            <span>SENIN - SELASA - RABU - KAMIS- JUM'AT </span>
+                                        </div>
+                                      </div>
+                                  </div>                            
+                                  <div class="generic_feature_list">
+                                      <ul>
+                                          <li><span>Sampah Hasil Masak</span></li>
+                                          <li><span>Dedaunan</span></li>
+                                          <li><span>Kresek</span></li>
+                                          <li><span>Plastik</span></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                            </div>
+                            
+                            <!-- end tabel  -->
+                          </div>  
+                        </div>
+                      </section>             
+                  </div>
+              </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
